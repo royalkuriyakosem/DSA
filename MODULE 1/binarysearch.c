@@ -28,7 +28,6 @@ void main()
 			flag=1;
 			index=mid;
 			break;
-			
 		}
 		else if(A[mid]<ele)
 		{
@@ -48,4 +47,3 @@ void main()
 		printf("\nElement is found at index %d\n",index);
 	}
 }
-	

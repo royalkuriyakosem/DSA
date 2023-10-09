@@ -67,6 +67,6 @@ void main()
 	{
 		printf("%d\t",A[i]);
 	}
-	print("\n");
+	printf("\n");
 		
 }	
