@@ -2,7 +2,7 @@
 void main()
 {
 	int A[50][50],B[50][50],i,j,q;
-	int C[50][50],nz1,nz2;
+	int C[50][50],nz1,nz2,k;
 	printf("Enter the number of non-zero elements: ");
 	scanf("%d",&nz1);
 	printf("\nEnter the TRIPLET  MATRIX 1\n");
@@ -43,49 +43,80 @@ void main()
 		}		
         printf("\n");
     }
-    q=1;
-    for(i=1;i<=nz1;i++)
+    if(A[0][0]==B[0][0] && A[0][1]==B[0][1])
     {
-        for(j=1;j<=nz2;j++)
-            if(A[i][0]==B[j][0] && A[i][1]==B[j][1])
+        i=1,j=1,k=0;
+        while(i<=nz1 && j<=nz2)
+        {
+            if(A[i][0]==B[j][0])
             {
-                C[q][0]=A[i][0];
-                C[q][1]=A[i][1];
-                C[q][2]=A[i][2]+B[i][2];
-                q++;
-            }
-            else if(A[i][0]==B[j][0])
-            {
-                if (A[i][1]<B[j][1])
+                if(A[i][1]==B[j][1])
                 {   
-                    C[q][0]=A[i][0];
-                    C[q][1]=A[i][1];
-                    C[q][2]=A[i][2]+B[i][2];
-                    q++;
-                    C[q][0]=B[i][0];
-                    C[q][1]=B[i][1];
-                    C[q][2]=B[i][2]+B[i][2];
-                    q++;
+                    k++;
+                    C[k][0]=A[i][0];
+                    C[k][1]=A[i][1];
+                    C[k][2]=A[i][2] + B[j][2];
+                    i++,j++;
                 }
-                else
-                {
-                    C[q][0]=B[i][0];
-                    C[q][1]=B[i][1];
-                    C[q][2]=B[i][2]+B[i][2];
-                    q++;
-                    C[q][0]=A[i][0];
-                    C[q][1]=A[i][1];
-                    C[q][2]=A[i][2]+B[i][2];
-                    q++;
+                else if(A[i][1]<B[j][1])
+                {   
+                    k++;
+                    C[k][0]=A[i][0];
+                    C[k][1]=A[i][1];
+                    C[k][2]=A[i][2];
+                    i++;
+                    k++;
+                    C[k][0]=B[j][0];
+                    C[k][1]=B[j][1];
+                    C[k][2]=B[j][2];
+                    j++;   
                 }
+                else if(A[i][1]>B[j][1])
+                {   
+                    k++;
+                    C[k][0]=B[j][0];
+                    C[k][1]=B[j][1];
+                    C[k][2]=B[j][2];
+                    j++;
+                    k++;
+                    C[k][0]=A[i][0];
+                    C[k][1]=A[i][1];
+                    C[k][2]=A[i][2];
+                    i++;    
+                        
+                }
+            }
+            else if(A[i][0]<B[j][0])
+            {
+                k++;
+                C[k][0]=A[i][0];
+                C[k][1]=A[i][1];
+                C[k][2]=A[i][2];
+                i++; 
             }
             else if(A[i][0]>B[j][0])
             {
-                continue;
+                k++;
+                C[k][0]=B[j][0];
+                C[k][1]=B[j][1];
+                C[k][2]=B[j][2];
+                j++;
             }
-
-        
+        }
+    }
+    C[0][0]=B[0][0];
+    C[0][1]=B[0][1];
+    C[0][2]=k;
+    printf("\nResultant TRIPLET  MATRIX \n");
+	for(i=0;i<=k;i++)
+	{
+		for(j=0;j<3;j++)
+		{
+			printf("%d\t",C[i][j]);
+		}		
+        printf("\n");
     }
 }
+    
     
 	
