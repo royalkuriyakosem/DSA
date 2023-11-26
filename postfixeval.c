@@ -3,7 +3,7 @@
 #include<math.h>
 int top=-1,max=50;
 char S[50];
-void push(char item)
+void push(int item)
 {
     if(top>=max-1)
     {
@@ -38,22 +38,27 @@ void eval(char symbol)
             x=pop();
             result=x-y;
             push(result);
+            break;
     case'+':y=pop();
             x=pop();
             result=x+y;
             push(result);
+            break;
     case'*':y=pop();
             x=pop();
             result=x*y;
             push(result);
+            break;
     case'/':y=pop();
             x=pop();
             result=x/y;
             push(result);
+            break;
     case'^':y=pop();
             x=pop();
             result=pow(x,y);
             push(result);
+            break;
     }
 }
 void main()
@@ -72,13 +77,15 @@ void main()
             case'*':
             case'/':
             case'^':eval(symbol);
+                    break;
                     
 
-            default:push(symbol);
+            default:symbol=symbol-48;
+                    push(symbol);
                     break;
         }
         
     }
     result=pop();
-    printf("%d",result);
+    printf("Evaluvated result= %d",result);
 }
